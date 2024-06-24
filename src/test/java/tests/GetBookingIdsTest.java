@@ -5,6 +5,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.Log;
 
@@ -26,5 +27,6 @@ public class GetBookingIdsTest {
 
         response.then().statusCode(200);
         Log.info("Retrieved Booking IDs: " + response.asString());
+        Assert.assertFalse(response.jsonPath().getList("bookingid").isEmpty(), "Booking IDs list should not be empty");
     }
 }

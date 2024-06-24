@@ -26,7 +26,6 @@ public class GetBookingTest {
         Response response = given()
                 .header("Content-Type", "application/json")
                 .get("/booking/" + bookingId);
-
         response.then().statusCode(200);
         Log.info("Retrieved Booking: " + response.asString());
     }

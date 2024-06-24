@@ -5,6 +5,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.GlobalVariables;
 import utils.Log;
@@ -31,5 +32,7 @@ public class DeleteBookingTest {
 
         response.then().statusCode(201);
         Log.info("Booking deleted: " + bookingId);
+        Assert.assertEquals(response.getStatusCode(), 201, "Status code should be 201");
+
     }
 }

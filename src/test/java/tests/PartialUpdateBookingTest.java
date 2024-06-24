@@ -6,6 +6,7 @@ import io.qameta.allure.Step;
 import io.qameta.allure.Story;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.GlobalVariables;
 import utils.Log;
@@ -34,10 +35,13 @@ public class PartialUpdateBookingTest {
 
         response.then().statusCode(200);
         Log.info("Booking partially updated: " + response.asString());
+        Assert.assertEquals(response.jsonPath().getString("firstname"), "John", "First name should be updated to John");
+        Assert.assertEquals(response.jsonPath().getString("lastname"), "Smith", "First name should be updated to Smith");
     }
 
     @Step("Prepare partial update JSON")
     private String getPartialUpdateJson() {
+
         return "{ \"firstname\": \"John\", \"lastname\": \"Smith\" }";
     }
 }
